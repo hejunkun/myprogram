@@ -2,6 +2,8 @@ package com.myprogram.web;
 
 import com.myprogram.entity.Cls;
 import com.myprogram.service.ClsService;
+import com.myprogram.service.StuService;
+import javafx.scene.control.Alert;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -21,6 +24,8 @@ public class ClsAction {
     @Resource(name = "clsService")
     private ClsService clsService;
 
+    @Resource(name = "stuService")
+    private StuService stuService;
     /**
      * 添加班级
      * @param cls 班级对象
@@ -55,6 +60,9 @@ public class ClsAction {
     @RequestMapping("/deleteCls")
     @ResponseBody
     public boolean deleteCls(Cls cls){
+        if (stuService.findStuList(cls).size()>0){
+            return false;
+        }
         return clsService.deleteCls(cls);
     }
 
@@ -66,6 +74,18 @@ public class ClsAction {
 
     public void setClsService(ClsService clsService) {
         this.clsService = clsService;
+    }
+
+    public ClsService getClsService() {
+        return clsService;
+    }
+
+    public StuService getStuService() {
+        return stuService;
+    }
+
+    public void setStuService(StuService stuService) {
+        this.stuService = stuService;
     }
 }
 

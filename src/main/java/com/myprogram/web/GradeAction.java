@@ -99,9 +99,9 @@ public class GradeAction {
     }
 
     /**
-     * 删除学生
+     * 删除学生成绩
      *
-     * @param grade  学生对象
+     * @param grade  学生成绩
      * @param attr
      * @return
      */
@@ -119,7 +119,7 @@ public class GradeAction {
     }
 
     /**
-     * 查询学生信息
+     * 查询学生成绩信息
      *
      * @param modelMap
      * @return

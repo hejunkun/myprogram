@@ -1,13 +1,14 @@
 package com.myprogram.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by hjk on 2018/1/8.
  */
 @Entity
 @Table(name = "grade")
-public class Grade {
+public class Grade implements Serializable {
     private int gno;
     private String gname;//学生名字
     private int gchinese;//语文成绩
@@ -16,25 +17,16 @@ public class Grade {
 
     private Cls cls;
 
-    @ManyToOne
-    @JoinColumn(name = "cno")
-    public Cls getCls() {
-        return cls;
-    }
-
-    public void setCls(Cls cls) {
-        this.cls = cls;
-    }
-
     public Grade() {
     }
 
-    public Grade(int gno, String gname, int gchinese, int gmath, int genglish) {
+    public Grade(int gno, String gname, int gchinese, int gmath, int genglish, Cls cls) {
         this.gno = gno;
         this.gname = gname;
         this.gchinese = gchinese;
         this.gmath = gmath;
         this.genglish = genglish;
+        this.cls = cls;
     }
 
     @Id
@@ -77,5 +69,15 @@ public class Grade {
 
     public void setGenglish(int genglish) {
         this.genglish = genglish;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "cno")
+    public Cls getCls() {
+        return cls;
+    }
+
+    public void setCls(Cls cls) {
+        this.cls = cls;
     }
 }
